@@ -1,19 +1,20 @@
 import Star from "./Star";
 
 type Count = {
-    count: number,
+    count?: number,
 }
 
-const Stars = ({ count = 0 }: Count) => {
+const Stars = (props: Count) => {
+    const { count = 0} = props;
     if ( count < 1 || count > 5 || typeof (count) !== "number") return;
-    const countList: never[] = [];
-    countList.length = count + 1;
+    const countList: number[] = [];
+    while (countList.length < count) countList.push(0);
     return (
         <ul className="card-body-stars u-clearfix">
             {countList.map((_el, i) => (
-                <li key={i}>
+                <ol key={i}>
                     <Star />
-                </li> 
+                </ol> 
             ))}
         </ul>
     );
